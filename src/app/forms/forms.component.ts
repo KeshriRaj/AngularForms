@@ -18,11 +18,22 @@ export class FormsComponent implements OnInit {
       'country': this.fb.control('IN'),
       'gender': this.fb.control('', Validators.required),
       'status': this.fb.control('',Validators.required),
+      'food': this.fb.control('',Validators.required),
       'address': this.fb.array([
         this.fb.group({
           'street': this.fb.control('', [Validators.required]),
           'door': this.fb.control('',[Validators.required]),
-          'zipcode': this.fb.control('',[Validators.required,Validators.pattern('[0-9]{5}')])
+          'zipcode': this.fb.control('',[Validators.required,Validators.pattern('[0-9]{6}')])
+        }),
+        this.fb.group({
+          'street': this.fb.control('', [Validators.required]),
+          'door': this.fb.control('',[Validators.required]),
+          'zipcode': this.fb.control('',[Validators.required])
+        }),
+        this.fb.group({
+          'street': this.fb.control('', [Validators.required]),
+          'door': this.fb.control('',[Validators.required]),
+          'zipcode': this.fb.control('',[Validators.required,Validators.pattern('[0-9]{6}')])
         })
       ])
     })
@@ -32,13 +43,22 @@ export class FormsComponent implements OnInit {
   }
       
   submitForm(){
+    if(this.userForm.valid)
+    {
        console.log(this.userForm.value);
        this.userDetails.push(this.userForm.value)
        console.log(this.userDetails)
+    }
    }
   deleterows(i:number)
   {
-    console.log(this.userDetails[i]);
+    for(let j=0;j<this.userDetails.length;j++)
+    {
+      if(i==j)
+      {
+        this.userDetails.splice(i,1);
+      }
+    }
   }
 
   user={name:"Mark"};

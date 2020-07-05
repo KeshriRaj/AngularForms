@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-6" style="float: left;">
-      <form [formGroup]="userForm" (submit)="submitForm()">
+    <div class="col-lg-4" style="float: left;">
+      <form  style="background-color: wheat; margin-left: -10px;" [formGroup]="userForm" (submit)="submitForm()">
         <label for="username">User Name</label>
         <input type="text" name="username" formControlName="name" />
         <span *ngIf="!userForm.get('name').valid && userForm.get('name').dirty">Name should in length between 5 - 20
@@ -15,30 +15,35 @@
         <input type="date" formControlName="dob" />
         <br />
         <label for="country">Country</label>
-        <select name="country" id="" formControlName="country">
+        <select name="country" value="IN" placeholder="IN" formControlName="country">
           <option value="IN">India</option>
           <option value="US">America</option>
           <option value="US">UK</option>
-          
         </select>
-        <label for="gender">Gender</label>
+        <label for="gender" style="display: inline-block;">Gender</label>
           <div>
             <input class="form-control" id="male" type="radio" value="male" formControlName="gender">
             <label for="male">Male</label>
-          </div>
-          <div>
             <input class="form-control" id="female" type="radio" value="female" formControlName="gender">
             <label for="female">Female</label>
           </div>
 
-          <label for="status">Status</label>
+          <label for="status" style="display: list-item;">Status</label>
           <div>
             <input class="form-control" id="married" type="radio" value="married" formControlName="status">
             <label for="married">Married</label>
-          </div>
-          <div>
             <input class="form-control" id="unmarried" type="radio" value="unmarried" formControlName="status">
             <label for="unmarried">Unmarried</label>
+          </div>
+          <div>
+            <label for="food">Fav Food</label>
+            <br>
+            Idli
+            <input type="checkbox" id="vehicle1" value="Idli" formControlName="food">
+            Chicken Biryani
+            <input type="checkbox" id="vehicle2"  value="Chicken Biryani" formControlName="food">
+            Veg Biryani
+            <input type="checkbox" id="vehicle3"  value="Veg Biryani" formControlName="food">
           </div>
         <br />
         <h4>Address</h4>
@@ -48,36 +53,38 @@
             <input type="text" formControlName="street">
             <br>
             <label for="">Door</label>
+            <br>
             <input type="text" formControlName="door">
             <br>
             <label for="">Zip Code</label>
-            <input type="text" formControlName="zipcode">
+            <input type="number" formControlName="zipcode">
           </div>
         </div>
         <br>
         <br>
-        <input type="submit" value="Submit"/>
+        <input class="btn btn-success" type="submit" value="Submit"/>
       </form>
     </div>
 
 
-    <div class="col-lg-6" style="float: right;">
-      <table style=" margin-top: 10px; font-size: 0.8em;" border="1px">
+    <div class="col-lg-8" style="float: right;">
+      <table style=" margin-top: 10px; font-size: 0.8em;" class="table table-striped">
         <thead>
         <tr>
-          <th style="padding:2.5px; width: 10%;" rowspan="2">Name</th>
-          <th style="padding:2.5px; width: 10%;" rowspan="2">Email</th>
-          <th style="padding:2.5px; width: 10%;" rowspan="2">DOB</th>
-          <th style="padding:2.5px; width: 10%;" rowspan="2">Country</th>
-          <th style="padding:2.5px; width: 10%;" rowspan="2">Gender</th>
-          <th style="padding:2.5px; width: 10%;" rowspan="2">Status</th>
-          <th style="padding:2.5px; width: 30%;" colspan="3">Address</th>
-          <th style="padding:2.5px; width: 5%;" rowspan="2">Button</th>
+          <th style="padding:1px; width: 10%;" rowspan="2">Name</th>
+          <th style="padding:1px; width: 10%;" rowspan="2">Email</th>
+          <th style="padding:1px; width: 5%;" rowspan="2">DOB</th>
+          <th style="padding:1px; width: 5%;" rowspan="2">Country</th>
+          <th style="padding:1px; width: 5%;" rowspan="2">Gender</th>
+          <th style="padding:1px; width: 10%;" rowspan="2">Status</th>
+          <th style="padding:1px; width: 10%;" rowspan="2">Food</th>
+          <th style="padding:1px; width: 30%;" colspan="3">Address</th>
+          <th style="padding:1px; width: 5%;" rowspan="2">Button</th>
         </tr>
         <tr>
-          <th>Street</th>
-          <th>Door</th>
-          <th>Pincode</th>
+          <th>Address1</th>
+          <th>Address2</th>
+          <th>Address3</th>
         </tr>
       </thead>
       <tbody>
@@ -88,10 +95,11 @@
           <td>{{user.country}}</td>
           <td>{{user.gender}}</td>
           <td>{{user.status}}</td>
-          <td>{{user.address[0].street}}</td>
-          <td>{{user.address[0].door}}</td>
-          <td>{{user.address[0].zipcode}}</td>
-          <button (click)="deleterows(i)">Delete</button>
+          <td>{{user.food}}</td>
+          <td>{{user.address[0].street+" " +user.address[0].door+" "+user.address[0].zipcode}}</td>
+          <td>{{user.address[1].street+" " +user.address[1].door+" "+user.address[1].zipcode}}</td>
+          <td>{{user.address[2].street+" " +user.address[2].door+" "+user.address[2].zipcode}}</td>
+          <button class="btn btn-danger" (click)="deleterows(i)">Delete</button>
         </tr>
       </tbody>
       </table>
